@@ -36,9 +36,9 @@ export default function AllCourse() {
             All Courses
           </h1>
           <input
-            type="text"
+            type="search"
             placeholder="Search courses..."
-            className="border border-white rounded-lg px-4 py-2 w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 text-white"
+            className="border border-white rounded-lg px-4 py-2 w-full md:w-64 focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 text-white"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

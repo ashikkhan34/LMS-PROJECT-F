@@ -5,6 +5,8 @@ import CategoryDetails from "../Components/CourseCategory/CategoryDetails";
 import MentorDetails from "../Components/MentorDetails/MentorDetails";
 import AllCourse from "../pages/AllCourse";
 import AllMentor from "../Components/AllMentor/AllMentor";
+import Register from "../Register/Register";
+import ToggleFrom from "../ToggleFrom/ToggleFrom";
 
 export const router = createBrowserRouter([
     {
@@ -30,7 +32,11 @@ export const router = createBrowserRouter([
             {
                 path:'/all-mentor',
                 element:<AllMentor></AllMentor>
-            }
+            },
+            {
+                path:'toggle-from',
+                element:<ToggleFrom></ToggleFrom>
+            },
         ]
     }
 ])
