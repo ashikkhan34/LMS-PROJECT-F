@@ -5,6 +5,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -21,16 +22,19 @@ export default function Register() {
   const onSubmit = async (data) => {
     try {
       const userInfo = {
+        id: uuidv4(),
         name: data.name,
         email: data.email,
         password: data.password,
         contactNo: data.contactNo,
         role: data.role,
+        isDeleted:false,
+        isPasswordChange:false
       };
 
-      const res = await axiosPublic.post("user/create-user", userInfo);
-
-      if (res.data?.insertedId) {
+      const res = await axiosPublic.post("/user/create-user", userInfo);
+console.log(res)
+      if (res.data?.success === true) {
         reset();
         Swal.fire({
           position: "top-end",

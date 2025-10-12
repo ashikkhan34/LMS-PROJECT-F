@@ -79,7 +79,7 @@ export default function Login() {
           disabled={isSubmitting}
           className="btn btn-primary w-full mt-2"
         >
-          {isSubmitting ? "Creating Account..." : "Register"}
+          {isSubmitting ? "Creating Account..." : "Login"}
         </button>
       </form>
     </div>

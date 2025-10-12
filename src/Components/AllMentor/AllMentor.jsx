@@ -44,7 +44,7 @@ export default function AllMentor() {
               onClick={() => setSelectedMentor(mentor)}
               className={`cursor-pointer rounded-xl p-4 border ${
                 selectedMentor?._id === mentor._id
-                  ? "border-indigo-800 shadow-lg"
+                  ? "border-red-600 shadow-lg"
                   : "border-gray-300 dark:border-gray-700"
               } hover:shadow-lg transition`}
             >
