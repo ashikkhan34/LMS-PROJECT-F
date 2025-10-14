@@ -50,6 +50,8 @@ export default function AllCourse() {
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
             <div
+              data-aos="fade-up"
+              data-aos-duration="3000"
               key={course._id}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300"
               onClick={() => navigate(`/categoryDetails/${course._id}`)}
@@ -93,8 +95,8 @@ export default function AllCourse() {
         ) : (
           <div className="col-span-full text-center text-gray-500 dark:text-gray-400 text-5xl mb-7 mt-10">
             <div className="justify-center flex mx-auto items-center gap-2">
-                <MdOutlineNotInterested className="text-6xl text-red-600"/>
-                Data Not Found
+              <MdOutlineNotInterested className="text-6xl text-red-600" />
+              Data Not Found
             </div>
           </div>
         )}

@@ -1,11 +1,34 @@
 import React, { useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Bar, Pie } from "react-chartjs-2";
-import { FaUsers, FaBook, FaChalkboardTeacher, FaCertificate } from "react-icons/fa";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import {
+  FaUsers,
+  FaBook,
+  FaChalkboardTeacher,
+  FaCertificate,
+} from "react-icons/fa";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from "chart.js";
 import Chatbox from "./Chatbox";
+import CountUp from "react-countup";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 export default function AdminDashboard() {
   const axiosPublic = useAxiosPublic();
@@ -22,7 +45,14 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [mentorRes, courseRes, userRes, studentRes, seminarRes, certificateRes] = await Promise.all([
+        const [
+          mentorRes,
+          courseRes,
+          userRes,
+          studentRes,
+          seminarRes,
+          certificateRes,
+        ] = await Promise.all([
           axiosPublic.get("/mentor"),
           axiosPublic.get("/course"),
           axiosPublic.get("/user"),
@@ -46,23 +76,65 @@ export default function AdminDashboard() {
 
   // 🔹 Chart data
   const barData = {
-    labels: ["Users", "Students", "Mentors", "Courses", "Seminars", "Certificates"],
+    labels: [
+      "Users",
+      "Students",
+      "Mentors",
+      "Courses",
+      "Seminars",
+      "Certificates",
+    ],
     datasets: [
       {
         label: "Count",
-        data: [users.length, students.length, mentors.length, courses.length, seminars.length, certificates.length],
-        backgroundColor: ["#4F46E5","#EC4899","#F59E0B","#10B981","#3B82F6","#EF4444"],
+        data: [
+          users.length,
+          students.length,
+          mentors.length,
+          courses.length,
+          seminars.length,
+          certificates.length,
+        ],
+        backgroundColor: [
+          "#4F46E5",
+          "#EC4899",
+          "#F59E0B",
+          "#10B981",
+          "#3B82F6",
+          "#EF4444",
+        ],
       },
     ],
   };
 
   const pieData = {
-    labels: ["Users", "Students", "Mentors", "Courses", "Seminars", "Certificates"],
+    labels: [
+      "Users",
+      "Students",
+      "Mentors",
+      "Courses",
+      "Seminars",
+      "Certificates",
+    ],
     datasets: [
       {
         label: "Distribution",
-        data: [users.length, students.length, mentors.length, courses.length, seminars.length, certificates.length],
-        backgroundColor: ["#4F46E5","#EC4899","#F59E0B","#10B981","#3B82F6","#EF4444"],
+        data: [
+          users.length,
+          students.length,
+          mentors.length,
+          courses.length,
+          seminars.length,
+          certificates.length,
+        ],
+        backgroundColor: [
+          "#4F46E5",
+          "#EC4899",
+          "#F59E0B",
+          "#10B981",
+          "#3B82F6",
+          "#EF4444",
+        ],
         hoverOffset: 10,
       },
     ],
@@ -78,51 +150,113 @@ export default function AdminDashboard() {
 
   return (
     <>
-     
       <div>
-        <h1 className="text-2xl">Welcome <span className="text-blue-600 font-bold">{user.name}</span></h1>
+        <h1 className="text-2xl">
+          Welcome <span className="text-blue-600 font-bold">{user.name}</span>
+        </h1>
       </div>
-    <div className="flex flex-col lg:flex-row min-h-screen ">
-      {/* 🔹 Main Content */}
-      <div className="flex-1 p-6 space-y-6">
-        
-        {/* 🔹 Summary Cards */}
-        <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="bg-purple-900" title="Users" value={users.length} icon={<FaUsers />} color="purple"/>
-          <Card title="Students" value={students.length} icon={<FaUsers />} color="pink"/>
-          <Card title="Mentors" value={mentors.length} icon={<FaChalkboardTeacher />} color="yellow"/>
-          <Card title="Courses" value={courses.length} icon={<FaBook />} color="green"/>
-          <Card title="Seminars" value={seminars.length} icon={<FaChalkboardTeacher />} color="blue"/>
-          <Card title="Certificates" value={certificates.length} icon={<FaCertificate />} color="red"/>
+      <div className="flex flex-col lg:flex-row min-h-screen ">
+        {/* 🔹 Main Content */}
+        <div className="flex-1 p-6 space-y-6">
+          {/* 🔹 Summary Cards */}
+          <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card
+              className="bg-purple-900"
+              title="Users"
+              value={
+                <CountUp end={users.length}
+                  duration={4}
+                  >
+                  </CountUp>
+              }
+              icon={<FaUsers />}
+              color="purple"
+            />
+              <Card
+                title="Students"
+                value={
+                  <CountUp end={students.length}
+                  duration={4}
+                  >
+                  </CountUp>
+                }
+                icon={<FaUsers />}
+                color="pink"
+              />
+            
+            <Card
+              title="Mentors"
+              value={
+                <CountUp end={mentors.length}
+                  duration={4}
+                  >
+                  </CountUp>
+              }
+              icon={<FaChalkboardTeacher />}
+              color="yellow"
+            />
+            <Card
+              title="Courses"
+              value={
+                <CountUp end={courses.length}
+                  duration={4}
+                  >
+                  </CountUp>
+              }
+              icon={<FaBook />}
+              color="green"
+            />
+            <Card
+              title="Seminars"
+              value={
+                <CountUp end={seminars.length}
+                  duration={4}
+                  >
+                  </CountUp>
+              }
+              icon={<FaChalkboardTeacher />}
+              color="blue"
+            />
+            <Card
+              title="Certificates"
+              value={
+                <CountUp end={certificates.length}
+                  duration={4}
+                  >
+                  </CountUp>
+              }
+              icon={<FaCertificate />}
+              color="red"
+            />
+          </div>
+
+          {/* 🔹 Charts */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-purple-950 p-6 rounded-lg shadow-lg">
+              <Bar data={barData} options={chartOptions} />
+            </div>
+            <div className="bg-purple-950 p-6 rounded-lg shadow-lg">
+              <Pie data={pieData} options={chartOptions} />
+            </div>
+          </div>
         </div>
 
-        {/* 🔹 Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-purple-950 p-6 rounded-lg shadow-lg">
-            <Bar data={barData} options={chartOptions}/>
-          </div>
-          <div className="bg-purple-950 p-6 rounded-lg shadow-lg">
-            <Pie data={pieData} options={chartOptions}/>
-          </div>
-        </div>
+        {/* 🔹 Chat Box */}
+        {/* <Chatbox /> */}
       </div>
-
-      {/* 🔹 Chat Box */}
-      {/* <Chatbox /> */}
-    </div>
     </>
   );
 }
 
 // 🔹 Summary Card Component
 const Card = ({ title, value, icon, color }) => (
-  <div className={`bg-purple-900 p-6 rounded-lg shadow-lg flex items-center space-x-4 hover:shadow-xl transition duration-300 hover:scale-x-105`}>
+  <div
+    className={`bg-purple-900 p-6 rounded-lg shadow-lg flex items-center space-x-4 hover:shadow-xl transition duration-300 hover:scale-x-105`}
+  >
     <div className={`text-4xl text-${color}-500`}>{icon}</div>
     <div>
       <p className="text-gray-300">{title}</p>
       <p className="text-2xl font-bold">{value}</p>
     </div>
   </div>
-
- 
 );

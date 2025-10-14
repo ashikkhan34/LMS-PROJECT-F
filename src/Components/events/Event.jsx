@@ -31,15 +31,19 @@ export default function Event() {
 
   return (
     <section className="bg-gradient-to-r from-indigo-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 md:px-20">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+      <div
+      data-aos="fade-up"
+     data-aos-duration="3000"
+      className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
         {/* Image Section */}
         <motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1}}
           className="w-full md:w-1/2"
         >
           <img
+          data-aos="fade-right"
             src={event.image}
             alt={event.title}
             className="w-full h-[400px] object-cover rounded-3xl shadow-xl border-4 border-white dark:border-gray-800"
@@ -50,7 +54,7 @@ export default function Event() {
         <motion.div
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1}}
           className="w-full md:w-1/2"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">

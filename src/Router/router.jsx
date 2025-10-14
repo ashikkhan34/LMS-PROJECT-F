@@ -14,6 +14,8 @@ import MentorDashboard from "../Dashborads/MentorDashboard/MentorDashboard";
 import AdminDashboard from "../Dashborads/AdminDashboard/AdminDashboard";
 import Dashboard from "../Dashborads/Dashboard";
 import AllUsers from "../Dashborads/AdminDashboard/AllUsers";
+import AllMentors from "../Dashborads/AdminDashboard/AllMentors";
+import Certificate from "../Dashborads/AdminDashboard/Certificate";
 
 export const router = createBrowserRouter([
     {
@@ -73,6 +75,14 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/allUsers',
                 element:<AllUsers></AllUsers>
+            },
+            {
+                path:'/dashboard/allMentors',
+                element:<AllMentors></AllMentors>
+            },
+            {
+                path:'/dashboard/certificate',
+                element:<Certificate></Certificate>
             }
         ]
     }

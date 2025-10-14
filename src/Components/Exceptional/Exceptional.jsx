@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 export default function Exceptional() {
   return (
     <section className="bg-white dark:bg-gray-900 py-20 px-6 md:px-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div
+      data-aos="fade-up"
+     data-aos-duration="3000"
+      className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left Side Images */}
         <div className="flex justify-center relative">
           {/* Big Circle Image */}

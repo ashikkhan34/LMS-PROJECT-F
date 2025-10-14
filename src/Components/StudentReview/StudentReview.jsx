@@ -30,7 +30,10 @@ export default function StudentReview() {
 
   return (
     <section className="w-full bg-gradient-to-r from-indigo-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 md:px-20">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+      <div
+      data-aos="fade-up"
+     data-aos-duration="3000"
+      className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
         {/* Text Section */}
         <Motion.div
           initial={{ x: 60, opacity: 0 }}

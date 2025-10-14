@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { GiDuration } from "react-icons/gi";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const CategoryCourses = () => {
   const axiosPublic = useAxiosPublic();
@@ -52,7 +53,7 @@ const CategoryCourses = () => {
   }, [selectedCategoryId, courses]);
 
   const handleAddToCart = () => {
-    toast.error('Nothing to Add Cart')
+    toast.error("Nothing to Add Cart");
   };
 
   return (
@@ -95,6 +96,8 @@ const CategoryCourses = () => {
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
             <div
+              data-aos="fade-up"
+              data-aos-duration="3000"
               key={course._id}
               className="bg-gray-800 hover:bg-blue-950 duration-1000 rounded-2xl shadow-md p-4 hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer flex flex-col"
             >

@@ -4,6 +4,7 @@ import { FaUser, FaUsers } from "react-icons/fa";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { GrDocumentUpdate } from "react-icons/gr";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function AllUsers() {
   const axiosPublic = useAxiosPublic();
@@ -18,22 +19,68 @@ export default function AllUsers() {
 
   // ✅ Promote student to mentor
   const handlePromoteToMentor = async (user) => {
-    try {
-      const res = await axiosPublic.put(`/user/update-user/${user._id}`, {
-        role: "mentor",
-      });
-      if (res.data.success) {
-        toast.success(`${user.name} is now a Mentor`);
-        // Frontend state update
-        setUsers((prev) =>
-          prev.map((u) => (u._id === user._id ? { ...u, role: "mentor" } : u))
-        );
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Do you really want to make ${user.name} a Mentor?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make Mentor!",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosPublic.put(`/user/update-user/${user._id}`, {
+            role: "mentor",
+          });
+          if (res.data.success) {
+            Swal.fire("Updated!", `${user.name} is now a Mentor.`, "success");
+            // Frontend state update
+            setUsers((prev) =>
+              prev.map((u) =>
+                u._id === user._id ? { ...u, role: "mentor" } : u
+              )
+            );
+          } else {
+            Swal.fire("Failed!", "Could not update role.", "error");
+          }
+        } catch (err) {
+          console.error(err);
+          Swal.fire("Error!", "Something went wrong.", "error");
+        }
       }
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to update role");
-    }
+    });
   };
+
+  //delete a user
+  const handleDeleteUser = async (id, name) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You won't be able to revert deleting ${name}!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosPublic.delete(`/user/delete-user/${id}`); // ✅ check route path
+          if (res.data.success) {
+            Swal.fire("Deleted!", `${name} has been deleted.`, "success");
+            setUsers((prev) => prev.filter((user) => user._id !== id));
+          } else {
+            Swal.fire("Failed!", "User could not be deleted.", "error");
+          }
+        } catch (err) {
+          console.error(err);
+          Swal.fire("Error!", "Something went wrong.", "error");
+        }
+      }
+    });
+  };
+
   return (
     <div className="px-2 md:px-10 py-6">
       {/* Header Section */}
@@ -74,6 +121,7 @@ export default function AllUsers() {
                     </button>
                   )}
                   <button
+                    onClick={() => handleDeleteUser(user._id)}
                     data-tip="Delete user"
                     className="tooltip btn btn-ghost btn-sm md:btn-md"
                   >

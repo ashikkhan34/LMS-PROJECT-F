@@ -41,6 +41,8 @@ export default function AllMentor() {
         {mentors.map((mentor) => (
           <SwiperSlide key={mentor._id} style={{ width: "180px" }}>
             <div
+              data-aos="fade-up"
+              data-aos-duration="3000"
               onClick={() => setSelectedMentor(mentor)}
               className={`cursor-pointer rounded-xl p-4 border ${
                 selectedMentor?._id === mentor._id
@@ -66,7 +68,10 @@ export default function AllMentor() {
 
       {/* Selected Mentor Details */}
       {selectedMentor && (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+        <div 
+        data-aos="fade-up"
+     data-aos-duration="3000"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6 mb-4">
             <img
               src={selectedMentor.profileImg}
@@ -113,7 +118,9 @@ export default function AllMentor() {
               <h3 className="font-semibold text-gray-700 dark:text-gray-300">
                 Bio:
               </h3>
-              <p className="text-gray-500 dark:text-gray-400">{selectedMentor.bio}</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                {selectedMentor.bio}
+              </p>
             </div>
 
             <div className="md:col-span-2">
