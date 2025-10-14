@@ -7,3 +7,11 @@
     color: red;
     font-weight: bold;
 }
+
+::-webkit-scrollbar {
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b82f6; /* Tailwind blue-500 */
+  border-radius: 10px;
+}

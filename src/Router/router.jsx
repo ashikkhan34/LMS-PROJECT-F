@@ -7,6 +7,13 @@ import AllCourse from "../pages/AllCourse";
 import AllMentor from "../Components/AllMentor/AllMentor";
 import Register from "../Register/Register";
 import ToggleFrom from "../ToggleFrom/ToggleFrom";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import StudentDashboard from "../Dashborads/StudentDaashboard/StudentDashboard";
+import MentorDashboard from "../Dashborads/MentorDashboard/MentorDashboard";
+import AdminDashboard from "../Dashborads/AdminDashboard/AdminDashboard";
+import Dashboard from "../Dashborads/Dashboard";
+import AllUsers from "../Dashborads/AdminDashboard/AllUsers";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +44,36 @@ export const router = createBrowserRouter([
                 path:'toggle-from',
                 element:<ToggleFrom></ToggleFrom>
             },
+            {
+                path:'/about',
+                element:<About></About>
+            },
+            {
+                path:'/contact',
+                element:<Contact></Contact>
+            },
+            {
+                path:'/studentDashboard',
+                element:<StudentDashboard></StudentDashboard>
+            },
+            {
+                path:'mentorDashboard',
+                element:<MentorDashboard></MentorDashboard>
+            },
+        ]
+    },
+    {
+        path:'/dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:'/dashboard/adminDashboard',
+                element:<AdminDashboard></AdminDashboard>
+            },
+            {
+                path:'/dashboard/allUsers',
+                element:<AllUsers></AllUsers>
+            }
         ]
     }
 ])

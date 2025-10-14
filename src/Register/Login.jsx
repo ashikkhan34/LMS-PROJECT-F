@@ -1,21 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 export default function Login() {
-    const [showPass,setShowPass] = useState()
+  const [showPass, setShowPass] = useState(false);
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
+
   const onSubmit = async (data) => {
-    console.log(data);
+    try {
+      const res = await axiosPublic.post("/auth/login", data);
+      console.log("🔹 Login Response:", res.data);
+
+      if (res.data.success) {
+        // 🔹 Save token + user data in localStorage
+        localStorage.setItem("lms-token", res.data.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.data.user));
+
+        // 🔹 Show success toast
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login Successful!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        // 🔹 Navigate user based on role
+        // const role = res.data.data.user.role;
+        // if (role === "student") navigate("/studentDashboard");
+        // else if (role === "mentor") navigate("/mentorDashboard");
+        // else if (role === "admin") navigate("/adminDashboard");
+        // else navigate("/");
+        navigate('/')
+        reset();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: res.data.message || "Invalid credentials!",
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.response?.data?.message || error.message,
+      });
+    }
   };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="max-w-sm mx-auto p-6 bg-base-200 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-4 text-center">Login</h2>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 relative">
         {/* Email */}
         <div>
           <input
@@ -36,40 +87,26 @@ export default function Login() {
         </div>
 
         {/* Password */}
-        <div >
+        <div className="relative">
           <input
             {...register("password", {
-              required: 'Password is required',
-              minLength: 6,
-              maxLength: 20,
-              pattern:
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=])[A-Za-z\d@#$%^&+=]{6,}$/,
+              required: "Password is required",
             })}
             type={showPass ? "text" : "password"}
-            placeholder="password"
+            placeholder="Password"
             className="input input-bordered w-full"
-            
           />
           <button
+            type="button"
             onClick={() => setShowPass(!showPass)}
-            className="absolute text-lg -ml-8 mt-3 "
+            className="absolute right-3 top-3 text-lg text-gray-500"
           >
-            {showPass ? <FaEye></FaEye> : <FaEyeSlash></FaEyeSlash>}
+            {showPass ? <FaEye /> : <FaEyeSlash />}
           </button>
-          {errors.password?.type === "required" && (
-            <p className="text-red-500">Password is required</p>
-          )}
-          {errors.password?.type === "minLength" && (
-            <p className="text-red-500">Password must be 6 characters</p>
-          )}
-          {errors.password?.type === "pattern" && (
-            <p className="text-red-500">
-              Password must be 1 uppercase 1 lowercase 1 special character and 1
-              number
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.password.message}
             </p>
-          )}
-          {errors.password?.type === "maxLength" && (
-            <p className="text-red-500">Password less then 20 characters</p>
           )}
         </div>
 
@@ -79,7 +116,7 @@ export default function Login() {
           disabled={isSubmitting}
           className="btn btn-primary w-full mt-2"
         >
-          {isSubmitting ? "Creating Account..." : "Login"}
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>

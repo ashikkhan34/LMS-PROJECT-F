@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import img from '../../assets/images/exceptional.png'
+import img from "../../assets/images/exceptional.png";
+import { Link } from "react-router-dom";
 
 export default function Exceptional() {
   return (
@@ -31,11 +32,12 @@ export default function Exceptional() {
           </motion.h2>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-            Bdcalling Academy offers a variety of courses, and upon successful completion,
-            we provide job opportunities within our company. Additionally, we offer
-            scholarships in different categories to support aspiring individuals. Our
-            training programs include hands-on experience with real client projects,
-            ensuring a comprehensive and practical learning experience.
+            Bdcalling Academy offers a variety of courses, and upon successful
+            completion, we provide job opportunities within our company.
+            Additionally, we offer scholarships in different categories to
+            support aspiring individuals. Our training programs include hands-on
+            experience with real client projects, ensuring a comprehensive and
+            practical learning experience.
           </p>
 
           {/* Highlight Box */}
@@ -49,9 +51,9 @@ export default function Exceptional() {
               Flexible Classes
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Fit education into your life—not the other way around. Our flexible
-              online classes are designed to adapt to your busy schedule, allowing
-              you to learn what you want, when you want.
+              Fit education into your life—not the other way around. Our
+              flexible online classes are designed to adapt to your busy
+              schedule, allowing you to learn what you want, when you want.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-y-2 mt-3 text-sm text-gray-700 dark:text-gray-300">
               <span>✅ Free Seminars & Workshops</span>
@@ -62,13 +64,15 @@ export default function Exceptional() {
           </motion.div>
 
           {/* Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-full shadow-md"
-          >
-            More About <ArrowUpRight size={18} />
-          </motion.button>
+          <Link to='/about'>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-full shadow-md"
+            >
+              More About <ArrowUpRight size={18} />
+            </motion.button>
+          </Link>
         </div>
       </div>
     </section>

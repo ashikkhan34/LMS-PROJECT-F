@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function Register() {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const [showPass,setShowPass] = useState()
+  const [showPass, setShowPass] = useState();
 
   const {
     register,
@@ -28,12 +28,19 @@ export default function Register() {
         password: data.password,
         contactNo: data.contactNo,
         role: data.role,
-        isDeleted:false,
-        isPasswordChange:false
+        isDeleted: false,
+        isPasswordChange: false,
       };
 
       const res = await axiosPublic.post("/user/create-user", userInfo);
-console.log(res)
+      if (res.data.data?.role === "mentor") {
+        return res.status(400).json({
+          success: false,
+          message: "Cannot create mentor via register",
+        });
+      }
+
+      console.log(res);
       if (res.data?.success === true) {
         reset();
         Swal.fire({
@@ -43,11 +50,14 @@ console.log(res)
           showConfirmButton: false,
           timer: 1500,
         });
-        toast.success("Registration successful!");
         navigate("/");
       }
     } catch (error) {
-      console.error("Signup Error:", error);
+      if (error.response && error.response.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("You can't join as a mentor via register only");
+      }
     }
   };
 
