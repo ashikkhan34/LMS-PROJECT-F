@@ -4,6 +4,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { GiDuration } from "react-icons/gi";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import Swal from "sweetalert2";
 
 const CategoryCourses = () => {
   const axiosPublic = useAxiosPublic();
@@ -53,7 +54,11 @@ const CategoryCourses = () => {
   }, [selectedCategoryId, courses]);
 
   const handleAddToCart = () => {
-    toast.error("Nothing to Add Cart");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...!!",
+      text: "Something went wrong Please Try Later !",
+    });
   };
 
   return (
@@ -82,7 +87,7 @@ const CategoryCourses = () => {
             className={`flex-shrink-0 px-5 py-2 rounded-sm border font-medium transition ${
               selectedCategoryId === cat._id
                 ? "text-blue-600 border-2 border-blue-700"
-                : " text-gray-400 hover:bg-gray-100 border-1"
+                : " text-gray-400 hover:bg-gray-900 border-1"
             }`}
             onClick={() => setSelectedCategoryId(cat._id)}
           >
@@ -95,16 +100,20 @@ const CategoryCourses = () => {
       <div className="grid md:grid-cols-3 gap-6">
         {filteredCourses.length > 0 ? (
           filteredCourses.map((course) => (
-            <div
+            <motion.div
+              key={course._id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: course._id * 0.1, duration: 0.6 }}
+              whileHover={{ scale: 1.05 }}
               data-aos="fade-up"
               data-aos-duration="3000"
-              key={course._id}
-              className="bg-gray-800 hover:bg-blue-950 duration-1000 rounded-2xl shadow-md p-4 hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer flex flex-col"
+              className=" bg-gray-800 hover:bg-blue-950 duration-1000 rounded-2xl shadow-md p-4 hover:shadow-xl transition transform hover:-translate-y-1 cursor-pointer flex flex-col"
             >
               <img
                 src={course.image}
                 alt={course.title}
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="w-full h-48 object-cover rounded-lg mb-4  transform hover:scale-110 transition-transform duration-700"
                 onClick={() => navigate(`/categoryDetails/${course._id}`)}
               />
 
@@ -137,9 +146,9 @@ const CategoryCourses = () => {
                 className="mt-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition"
                 onClick={() => handleAddToCart(course)}
               >
-                Add to Cart
+                Enroll Course
               </button>
-            </div>
+            </motion.div>
           ))
         ) : (
           <p className="text-center text-gray-400 text-4xl col-span-3">

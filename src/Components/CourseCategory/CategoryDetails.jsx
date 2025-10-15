@@ -244,7 +244,7 @@ const CategoryDetails = () => {
                 }`}
               >
                 <ShoppingCart size={20} />{" "}
-                {loading ? "Adding..." : "Add to Cart"}
+                {loading ? "Adding..." : "Enroll Now"}
               </button>
             </div>
           </div>

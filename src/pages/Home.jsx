@@ -4,6 +4,7 @@ import CategoryCourses from '../Components/CourseCategory/Category'
 import Exceptional from '../Components/Exceptional/Exceptional'
 import Event from '../Components/events/Event'
 import StudentReview from '../Components/StudentReview/StudentReview'
+import AllStudentReview from '../Components/StudentReview/AllStudentReview'
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Exceptional></Exceptional>
         <Event></Event>
         <StudentReview></StudentReview>
+        <AllStudentReview></AllStudentReview>
     </div>
   )
 }

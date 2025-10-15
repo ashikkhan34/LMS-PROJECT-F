@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHome, FaUser } from "react-icons/fa";
+import { FaCertificate, FaHome, FaUser } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
 import { MdAddIcCall, MdConnectWithoutContact } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
@@ -26,7 +26,7 @@ export default function Dashboard() {
           </NavLink>
           <NavLink to='/dashboard/certificate'>
             <li className="flex items-center gap-1 mb-2">
-              <FaUser></FaUser> Certificate
+              <FaCertificate></FaCertificate> Certificate
             </li>
           </NavLink>
         </ul>

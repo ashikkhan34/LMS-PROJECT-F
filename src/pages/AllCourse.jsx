@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { MdOutlineNotInterested } from "react-icons/md";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function AllCourse() {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
+
+  const handleEnroll = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Oops... !!",
+      text: "Something went wrong Please Try Later !",
+      
+    });
+  };
 
   // Fetch courses
   useEffect(() => {
@@ -54,11 +65,11 @@ export default function AllCourse() {
               data-aos-duration="3000"
               key={course._id}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300"
-              onClick={() => navigate(`/categoryDetails/${course._id}`)}
             >
               <img
                 src={course.image}
                 alt={course.title}
+                onClick={() => navigate(`/categoryDetails/${course._id}`)}
                 className="w-full h-48 object-cover"
               />
               <div className="p-4">
@@ -74,14 +85,10 @@ export default function AllCourse() {
                     ৳ {course.fee}
                   </span>
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent card click
-                      // Add to cart logic here
-                      console.log("Added to cart:", course.title);
-                    }}
+                    onClick={handleEnroll}
                     className="bg-indigo-600 text-white px-3 py-1 rounded-lg hover:bg-indigo-700 transition"
                   >
-                    Add to Cart
+                    Enroll Now
                   </button>
                 </div>
 

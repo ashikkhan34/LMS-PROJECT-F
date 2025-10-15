@@ -16,6 +16,9 @@ import Dashboard from "../Dashborads/Dashboard";
 import AllUsers from "../Dashborads/AdminDashboard/AllUsers";
 import AllMentors from "../Dashborads/AdminDashboard/AllMentors";
 import Certificate from "../Dashborads/AdminDashboard/Certificate";
+import MentorHome from "../Dashborads/MentorDashboard/MentorHome/MentorHome";
+import AllCourses from "../Dashborads/MentorDashboard/AllCourses/AllCourses";
+import AllEvents from "../Components/events/AllEvents";
 
 export const router = createBrowserRouter([
     {
@@ -59,9 +62,9 @@ export const router = createBrowserRouter([
                 element:<StudentDashboard></StudentDashboard>
             },
             {
-                path:'mentorDashboard',
-                element:<MentorDashboard></MentorDashboard>
-            },
+                path:'/all-events',
+                element:<AllEvents></AllEvents>
+            }
         ]
     },
     {
@@ -83,6 +86,20 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/certificate',
                 element:<Certificate></Certificate>
+            }
+        ]
+    },
+    {
+        path:'/mentorDashboard',
+        element:<MentorDashboard></MentorDashboard>,
+        children:[
+            {
+                path:'/mentorDashboard/mentorHome',
+                element:<MentorHome></MentorHome>
+            },
+            {
+                path:'/mentorDashboard/all-course',
+                element:<AllCourses></AllCourses>
             }
         ]
     }

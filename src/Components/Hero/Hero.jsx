@@ -31,14 +31,15 @@ export default function Hero() {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-3 rounded-full transition"
-                href="#courses"
+                href="/all-courses"
               >
                 Explore Courses
               </motion.a>
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 className="border border-white px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white hover:text-black transition"
-                href="#"
+                href="https://youtu.be/FtsFZkw2h-A"
+                target="_blank"
               >
                 <PlayCircle className="w-5 h-5" />
                 Watch Intro
