@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axiosPublic = axios.create({
-    baseURL:'http://localhost:4000/api/'
+    baseURL:'https://lms-project-tau-inky.vercel.app/api'
 })
 
 const useAxiosPublic = () =>{
