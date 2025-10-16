@@ -11,7 +11,7 @@ export default function StudentDashboard() {
   const [loading, setLoading] = useState(true);
 
   // 🔹 get user from localStorage
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("/user"));
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -60,8 +60,8 @@ export default function StudentDashboard() {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <h1 className="text-4xl md:text-5xl font-bold tracking-wide">Welcome, {user.name}!</h1>
-        <p className="text-gray-400 mt-2 text-lg">{user.email}</p>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-wide">Welcome, {user?.name}!</h1>
+        <p className="text-gray-400 mt-2 text-lg">{user?.email}</p>
       </motion.div>
 
       {/* Profile Card */}
@@ -73,26 +73,26 @@ export default function StudentDashboard() {
       >
         <div className="flex-shrink-0">
           <img
-            src={student.profileImg}
-            alt={student.name}
+            src={student?.profileImg}
+            alt={student?.name}
             className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-yellow-400 shadow-lg"
           />
         </div>
 
         <div className="flex-1 flex flex-col justify-between space-y-4">
           <div>
-            <h2 className="text-3xl font-bold text-yellow-400">{student.name}</h2>
+            <h2 className="text-3xl font-bold text-yellow-400">{student?.name}</h2>
             <p className="text-gray-400 italic">{student.courseName}</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div className="flex items-center gap-3 text-gray-300">
-                <FaEnvelope className="text-yellow-400 text-xl" /> {student.email}
+                <FaEnvelope className="text-yellow-400 text-xl" /> {student?.email}
               </div>
               <div className="flex items-center gap-3 text-gray-300">
-                <FaPhone className="text-yellow-400 text-xl" /> {student.contactNo}
+                <FaPhone className="text-yellow-400 text-xl" /> {student?.contactNo}
               </div>
               <div className="flex items-center gap-3 text-gray-300">
-                <FaUserGraduate className="text-yellow-400 text-xl" /> Guardian: {student.guardian}
+                <FaUserGraduate className="text-yellow-400 text-xl" /> Guardian: {student?.guardian}
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <FaMapMarkerAlt className="text-yellow-400 text-xl" /> {student.address}
