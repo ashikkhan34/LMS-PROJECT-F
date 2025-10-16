@@ -27,20 +27,12 @@ export default function Register() {
         email: data.email,
         password: data.password,
         contactNo: data.contactNo,
-        role: data.role,
+        role: "student",
         isDeleted: false,
         isPasswordChange: false,
       };
 
       const res = await axiosPublic.post("/user/create-user", userInfo);
-      if (res.data.data?.role === "mentor") {
-        return res.status(400).json({
-          success: false,
-          message: "Cannot create mentor via register",
-        });
-      }
-
-      console.log(res);
       if (res.data?.success === true) {
         reset();
         Swal.fire({
@@ -53,11 +45,7 @@ export default function Register() {
         navigate("/");
       }
     } catch (error) {
-      if (error.response && error.response.data?.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("You can't join as a mentor via register only");
-      }
+       toast.error(error.response.data.message);
     }
   };
 
@@ -145,22 +133,6 @@ export default function Register() {
               {...register("contactNo")}
               className="input input-bordered w-full"
             />
-          </div>
-
-          {/* Role */}
-          <div>
-            <select
-              {...register("role", { required: "Role is required" })}
-              className="select select-bordered w-full"
-            >
-              <option value="">Select Role</option>
-              <option value="student">Student</option>
-              <option value="mentor">Mentor</option>
-              <option value="admin">Admin</option>
-            </select>
-            {errors.role && (
-              <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
-            )}
           </div>
 
           {/* Submit */}
