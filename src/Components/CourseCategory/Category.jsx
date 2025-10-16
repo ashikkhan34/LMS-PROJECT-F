@@ -20,6 +20,7 @@ const CategoryCourses = () => {
     const fetchCategories = async () => {
       try {
         const res = await axiosPublic.get("/category");
+        console.log(res.data)
         setCategories(res.data?.data || []);
       } catch (err) {
         console.error(err);
